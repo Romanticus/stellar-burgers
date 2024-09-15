@@ -13,7 +13,7 @@ export const Feed: FC = () => {
     dispatch(fetchFeed());
   }, []);
   const orderData = useSelector(selectOrdersData);
-  const orders: TOrder[] = orderData.orders;
+  const orders = orderData.orders;
 
   if (!orders.length) {
     return <Preloader />;

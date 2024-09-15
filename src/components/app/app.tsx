@@ -98,6 +98,16 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route path='/ingredients/:id' element={<IngredientDetails />} />
+          <Route path='/feed/:number' element={<OrderInfo />} />
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <ProtectedRoute>
+                <OrderInfo />
+              </ProtectedRoute>
+            }
+          />
           <Route path='*' element={<NotFound404 />} />
         </Routes>
         {backgroundLocation && (
@@ -117,7 +127,7 @@ const App = () => {
               path='/ingredients/:id'
               element={
                 <Modal
-                  title={`#${location.pathname.split('/')[2]}`}
+                  title={`Детали ингредиента`}
                   onClose={() => navigate(-1)}
                 >
                   <IngredientDetails />
