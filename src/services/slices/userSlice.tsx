@@ -124,6 +124,9 @@ export const userSlice = createSlice({
         state.error = action.payload.success
           ? ''
           : 'Не удалось зарегестрироваться.';
+        if (action.payload.success) {
+          state.user = action.payload.user; // Устанавливаем пользователя
+        }
       })
       .addCase(loginUser.pending, (state) => {
         state.success = false;
@@ -178,7 +181,7 @@ export const userSlice = createSlice({
     selectIsAuthChecked: (sliceState) => sliceState.isAuthChecked
   }
 });
-
+export const userReducer = userSlice.reducer;
 export const { resetError, setUser, setIsAuthChecked, clearUser } =
   userSlice.actions;
 export const { selectUser, selectUserOrder, selectIsAuthChecked } =

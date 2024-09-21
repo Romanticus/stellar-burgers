@@ -35,4 +35,5 @@ export const feedsSlice = createSlice({
     selectOrdersData: (sliceState) => sliceState
   }
 });
+export const feedReducer = feedsSlice.reducer;
 export const { selectOrdersData } = feedsSlice.selectors;

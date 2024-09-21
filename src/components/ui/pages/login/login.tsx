@@ -46,7 +46,7 @@ export const LoginUI: FC<LoginUIProps> = ({
               autoComplete='current-password'
             />
           </div>
-          <div className={`pb-6 ${styles.button}`}>
+          <div className={`pb-6 ${styles.button}`} data-cy='login-button'>
             <Button type='primary' size='medium' htmlType='submit'>
               Войти
             </Button>
