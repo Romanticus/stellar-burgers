@@ -1,3 +1,12 @@
+const CONSTANTS = {
+  MODAL: '[data-cy="modal"]',
+  ADD_BUTTON_1: '[data-cy="add-button-1"]',
+  ADD_BUTTON_2: '[data-cy="add-button-2"]',
+  ADD_BUTTON_3: '[data-cy="add-button-3"]',
+  ORDER_BUTTON: '[data-cy="button-order"]',
+  CLOSE_BUTTON: '[data-cy="close-button"]'
+};
+
 describe('проверяем доступность приложения', function () {
   it('сервис должен быть доступен по адресу localhost:5173', function () {
     cy.visit('/');
@@ -26,7 +35,7 @@ describe('тестирование действий с ингридентами'
       cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
       cy.visit('/');
 
-      cy.get('[data-cy="add-button-2"]').find('button').click();
+      cy.get(CONSTANTS.ADD_BUTTON_2).find('button').click();
 
       cy.get('[data-cy="burger-constructor-filling"]').within(() => {
         cy.get('[data-cy="i-2"]').should('exist');
@@ -40,9 +49,9 @@ describe('тестирование действий с ингридентами'
         cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
         cy.visit('/');
 
-        cy.get('[data-cy="add-button-1"]').find('button').click();
-        cy.get('[data-cy="add-button-2"]').find('button').click();
-        cy.get('[data-cy="add-button-3"]').find('button').click();
+        cy.get(CONSTANTS.ADD_BUTTON_1).find('button').click();
+        cy.get(CONSTANTS.ADD_BUTTON_2).find('button').click();
+        cy.get(CONSTANTS.ADD_BUTTON_3).find('button').click();
 
         cy.get('[data-cy="burger-constructor-buns"]')
           .first()
@@ -65,71 +74,71 @@ describe('тестирование действий с ингридентами'
   });
 });
 describe('тестирование на показ и закрытие модального окна', () => {
-describe('Тест на показ модального окна ингредиента', () => {
-  it('страница отображает модальное окно ингредиента', () => {
-    getMockIngredients().then((ingredients) => {
-      cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
-      cy.visit('/');
+  describe('Тест на показ модального окна ингредиента', () => {
+    it('страница отображает модальное окно ингредиента', () => {
+      getMockIngredients().then((ingredients) => {
+        cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
+        cy.visit('/');
 
-      cy.get('[data-cy="add-button-1"]').find('a').click();
+        cy.get(CONSTANTS.ADD_BUTTON_1).find('a').click();
 
-      cy.url().should('include', '/ingredients/1');
+        cy.url().should('include', '/ingredients/1');
 
-      cy.get('[data-cy="modal"]').should('be.visible');
-      cy.get('[data-cy="i-1"]').within(() => {
-        cy.get('img').should(
-          'have.attr',
-          'src',
-          `${ingredients[0].image_large}`
-        );
-        cy.get('h3').should('contain.text', `${ingredients[0].name}`);
-        cy.contains('Калории, ккал')
-          .next()
-          .should('contain.text', `${ingredients[0].calories}`);
-        cy.contains('Белки, г')
-          .next()
-          .should('contain.text', `${ingredients[0].proteins}`);
-        cy.contains('Жиры, г')
-          .next()
-          .should('contain.text', `${ingredients[0].fat}`);
-        cy.contains('Углеводы, г')
-          .next()
-          .should('contain.text', `${ingredients[0].carbohydrates}`);
+        cy.get(CONSTANTS.MODAL).should('be.visible');
+        cy.get('[data-cy="i-1"]').within(() => {
+          cy.get('img').should(
+            'have.attr',
+            'src',
+            `${ingredients[0].image_large}`
+          );
+          cy.get('h3').should('contain.text', `${ingredients[0].name}`);
+          cy.contains('Калории, ккал')
+            .next()
+            .should('contain.text', `${ingredients[0].calories}`);
+          cy.contains('Белки, г')
+            .next()
+            .should('contain.text', `${ingredients[0].proteins}`);
+          cy.contains('Жиры, г')
+            .next()
+            .should('contain.text', `${ingredients[0].fat}`);
+          cy.contains('Углеводы, г')
+            .next()
+            .should('contain.text', `${ingredients[0].carbohydrates}`);
+        });
       });
     });
   });
-});
 
-describe('Тест закрытия модального окна ингредиента', () => {
-  it('страница закрывает модальное окно ингредиента при нажатии на крестик', () => {
-    cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
-    cy.visit('/');
+  describe('Тест закрытия модального окна ингредиента', () => {
+    it('страница закрывает модальное окно ингредиента при нажатии на крестик', () => {
+      cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
+      cy.visit('/');
 
-    cy.get('[data-cy="add-button-1"]').find('a').click();
-    cy.get('[data-cy="close-button"]').click();
-    cy.get('[data-cy="modal"]').should('not.exist');
-    cy.url().should('include', '/');
-  });
-
-  it('страница закрывает модальное окно ингредиента при нажатии на оверлей', () => {
-    cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
-    cy.visit('/');
-
-    cy.get('[data-cy="add-button-1"]').find('a').click();
-    cy.get('[data-cy="modal"]').should('be.visible');
-
-    cy.get('[data-cy="modal"]').then(($modal) => {
-      const modalPosition = $modal[0].getBoundingClientRect();
-      const clickX = modalPosition.right + 50;
-      const clickY = modalPosition.top + modalPosition.height / 2;
-
-      cy.get('body').click(clickX, clickY);
+      cy.get(CONSTANTS.ADD_BUTTON_1).find('a').click();
+      cy.get(CONSTANTS.CLOSE_BUTTON).click();
+      cy.get(CONSTANTS.MODAL).should('not.exist');
+      cy.url().should('include', '/');
     });
 
-    cy.get('[data-cy="modal"]').should('not.exist');
-    cy.url().should('include', '/');
+    it('страница закрывает модальное окно ингредиента при нажатии на оверлей', () => {
+      cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
+      cy.visit('/');
+
+      cy.get(CONSTANTS.ADD_BUTTON_1).find('a').click();
+      cy.get(CONSTANTS.MODAL).should('be.visible');
+
+      cy.get(CONSTANTS.MODAL).then(($modal) => {
+        const modalPosition = $modal[0].getBoundingClientRect();
+        const clickX = modalPosition.right + 50;
+        const clickY = modalPosition.top + modalPosition.height / 2;
+
+        cy.get('body').click(clickX, clickY);
+      });
+
+      cy.get(CONSTANTS.MODAL).should('not.exist');
+      cy.url().should('include', '/');
+    });
   });
-});
 });
 describe('тестирование оформления и создание заказа', () => {
   const mockAccessToken = '1234567889';
@@ -148,9 +157,9 @@ describe('тестирование оформления и создание за
 
     cy.wait('@getIngredients');
 
-    cy.get('[data-cy="add-button-1"]').find('button').click();
-    cy.get('[data-cy="add-button-2"]').find('button').click();
-    cy.get('[data-cy="add-button-3"]').find('button').click();
+    cy.get(CONSTANTS.ADD_BUTTON_1).find('button').click();
+    cy.get(CONSTANTS.ADD_BUTTON_2).find('button').click();
+    cy.get(CONSTANTS.ADD_BUTTON_3).find('button').click();
     cy.intercept('POST', 'api/auth/login', {
       statusCode: 200,
       body: {
@@ -177,18 +186,18 @@ describe('тестирование оформления и создание за
       }
     }).as('postOrder');
 
-    cy.get('[data-cy="button-order"]').find('button').click();
+    cy.get(CONSTANTS.ORDER_BUTTON).find('button').click();
     cy.get("[data-cy='login-button']").find('button').click();
     cy.wait('@postLogin');
-    cy.get('[data-cy="button-order"]').find('button').click();
+    cy.get(CONSTANTS.ORDER_BUTTON).find('button').click();
 
     cy.wait('@postOrder');
 
-    cy.get('[data-cy="modal"]').should('be.visible');
-    cy.get('[data-cy="modal"]').should('contain', '12345');
+    cy.get(CONSTANTS.MODAL).should('be.visible');
+    cy.get(CONSTANTS.MODAL).should('contain', '12345');
 
-    cy.get('[data-cy="close-button"]').click();
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get(CONSTANTS.CLOSE_BUTTON).click();
+    cy.get(CONSTANTS.MODAL).should('not.exist');
 
     cy.get('[data-cy="burger-constructor-emptyBunTop"]')
       .first()
@@ -211,22 +220,22 @@ describe('тестирование оформления и создание за
     cy.visit('/');
     cy.wait('@getIngredients');
 
-    cy.get('[data-cy="add-button-1"]').find('button').click();
+    cy.get(CONSTANTS.ADD_BUTTON_1).find('button').click();
 
-    cy.get('[data-cy="button-order"]').find('button').click();
+    cy.get(CONSTANTS.ORDER_BUTTON).find('button').click();
 
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get(CONSTANTS.MODAL).should('not.exist');
   });
 
   it('страница не должна отображать модальное окно оформления заказа при отсутствии булки', () => {
     cy.visit('/');
     cy.wait('@getIngredients');
 
-    cy.get('[data-cy="add-button-2"]').find('button').click();
-    cy.get('[data-cy="add-button-3"]').find('button').click();
+    cy.get(CONSTANTS.ADD_BUTTON_2).find('button').click();
+    cy.get(CONSTANTS.ADD_BUTTON_3).find('button').click();
 
-    cy.get('[data-cy="button-order"]').find('button').click();
+    cy.get(CONSTANTS.ORDER_BUTTON).find('button').click();
 
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get(CONSTANTS.MODAL).should('not.exist');
   });
 });
