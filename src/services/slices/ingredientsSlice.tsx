@@ -47,5 +47,6 @@ export const ingredientsSlice = createSlice({
     selectIsLoading: (sliceState) => sliceState.isLoading
   }
 });
+export const ingredientReducer = ingredientsSlice.reducer;
 export const { selectIngredients, selectIsLoading } =
   ingredientsSlice.selectors;

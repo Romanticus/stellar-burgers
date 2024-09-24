@@ -3,9 +3,9 @@ import { ConstructorPageUI } from '@ui-pages';
 import { TConstructorIngredient, TIngredient, TOrder } from '@utils-types';
 import { v4 as uuidv4 } from 'uuid';
 import { act } from 'react-dom/test-utils';
-import { getOrderByNumberApi, orderBurgerApi } from '@api';
+import { getOrderByNumberApi, orderBurgerApi } from '../../utils/burger-api';
 
-type TconstructorState = {
+export type TconstructorState = {
   constructorItems: {
     bun?: {
       price: number;
@@ -107,6 +107,9 @@ export const constructorIngredientSlice = createSlice({
       })
       .addCase(getOrderByNumber.fulfilled, (state, action) => {
         state.orderByNumber = action.payload.orders[0];
+      })
+      .addCase(getOrderByNumber.rejected, () => {
+        console.log('err');
       });
   },
   selectors: {
@@ -116,7 +119,7 @@ export const constructorIngredientSlice = createSlice({
     selectOrderByNumber: (sliceState) => sliceState.orderByNumber
   }
 });
-
+export const constructorReducer = constructorIngredientSlice.reducer;
 export const {
   addIngredient,
   removeIngredient,
