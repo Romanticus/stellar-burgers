@@ -5,3 +5,7 @@
 .form {
   max-width: 480px;
 }
+
+.flexContain {
+  width: fit-content;
+}

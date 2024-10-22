@@ -15,8 +15,8 @@ export const ProfileUI: FC<ProfileUIProps> = ({
   handleCancel,
   handleInputChange
 }) => (
-  <main className={`${commonStyles.container}`}>
-    <div className={`mt-30 mr-15 ${styles.menu}`}>
+  <main className={`${commonStyles.container} ${styles.flexContain}`}>
+    <div className={`mt-30 mr-15 ${styles.menu} pl-5`}>
       <ProfileMenu />
     </div>
     <form

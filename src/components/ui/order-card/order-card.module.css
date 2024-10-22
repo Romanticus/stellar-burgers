@@ -10,7 +10,8 @@
   color: unset;
   background-color: #1c1c21;
   border-radius: 40px;
-  min-width: 576px;
+  min-width: 300px;
+  max-width: 70svw;
   box-sizing: border-box;
 }
 

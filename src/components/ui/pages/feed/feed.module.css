@@ -5,6 +5,7 @@
   max-width: 1240px;
   margin-left: auto;
   margin-right: auto;
+  align-items: center;
 }
 
 .titleBox {
@@ -19,8 +20,12 @@
   display: flex;
   justify-content: space-between;
   height: 100%;
-  width: 1240px;
+  max-width: 1240px;
   overflow: hidden;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
 }
 
 .columnOrders {
@@ -31,4 +36,12 @@
   overflow-y: auto;
   overflow-x: hidden;
   width: 580px;
+}
+
+@media (max-width: 1219px) {
+  .columnInfo {
+    order: -1;
+    overflow-y: hidden;
+    padding-top: 25px;
+  }
 }
