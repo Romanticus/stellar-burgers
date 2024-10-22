@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
+  
 }
 
 .elements {
@@ -73,4 +74,9 @@
   flex-direction: column;
   width: 100%;
   max-width: 536px;
+}
+@media (max-width: 1219px) {
+  .burger_constructor  {
+    order: -1;
+  }
 }

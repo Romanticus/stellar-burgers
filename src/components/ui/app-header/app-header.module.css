@@ -7,11 +7,13 @@
   max-width: 1240px;
   height: 56px;
   margin: 0 auto;
+  gap: 10px;
 }
 
 .menu_part_left {
   display: flex;
   flex-basis: 35%;
+  align-items: center
 }
 
 .link {
