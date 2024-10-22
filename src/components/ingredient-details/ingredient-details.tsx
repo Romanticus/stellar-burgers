@@ -22,8 +22,8 @@ export const IngredientDetails: FC = () => {
     if (!ingredientData) return;
     if (ingredientData.type === 'bun') {
       dispatch(setBun(ingredientData));
-      navigate(-1);
     } else dispatch(addIngredient(ingredientData));
+    navigate(-1);
   };
   if (!ingredientData) {
     return <Preloader />;

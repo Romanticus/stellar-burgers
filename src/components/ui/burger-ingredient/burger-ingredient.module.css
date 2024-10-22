@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
 .article {
   position: relative;
   display: flex;
@@ -11,9 +10,44 @@
   width: 260px;
   cursor: pointer;
   text-decoration: none;
-  color: #ffff;
+  color: #ffff; /* Исходный цвет текста */
+  transition: color 0.3s ease, text-shadow 0.3s ease, filter 0.3s ease; /* Добавлено для плавного перехода тени */
 }
 
+.addButton {
+  --addButtonAccentColor:rgba(64, 224, 208, 0.294); 
+ 
+   width: 260px;
+   justify-content: center;
+   color: inherit;
+   padding-top: 5px ;
+   padding-bottom: 5px ;
+   /* margin:0 7px; */
+ }
+.article img {
+  transition: transform 0.3s ease;
+  /* Плавный переход для картинки */
+}
+
+.article:hover img {
+  transform: translateY(-10px);
+  /* Поднимаем картинку на 10 пикселей */
+}
+
+.article:hover {
+  
+  --onHoverColor:#40E0D0;
+  color:var(--onHoverColor);
+  text-shadow: 
+  0px 0px 16px 4px var( --onHoverColor), 
+  0px 0px 8px 4px var( --onHoverColor);
+
+filter: drop-shadow(0px 4px 32px var( --onHoverColor));
+  /* Бирюзовый цвет текста */
+}
+.article:active{
+  --onHoverColor:rgba(224, 64, 176, 0.294);
+}
 .cost {
   display: flex;
   align-items: center;
@@ -24,7 +58,17 @@
   text-align: center;
 }
 
-.addButton {
-  width: 260px;
-  justify-content: center;
+.addButton:hover {
+ 
+ border-radius: 5px;
+ background-color:var(--addButtonAccentColor);
+
+ box-shadow: 
+     0px 0px 16px 4px var(--addButtonAccentColor), 
+     0px 0px 8px 4px var(--addButtonAccentColor);
+ 
+ filter: drop-shadow(0px 4px 32px var(--addButtonAccentColor));
+}
+.addButton:active{
+ --addButtonAccentColor:rgba(224, 64, 176, 0.294);
 }

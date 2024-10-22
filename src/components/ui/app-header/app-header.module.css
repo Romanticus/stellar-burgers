@@ -20,8 +20,17 @@
   display: flex;
   text-decoration: none;
   color: var(--text-inactive-color);
+  transition: text-shadow 0.3s ease, filter 0.3s ease;
 }
+.link:hover {
+  --onHoverColor:#40E0D0;
+  color:var(--onHoverColor);
+  text-shadow: 
+  0px 0px 16px 4px var( --onHoverColor), 
+  0px 0px 8px 4px var( --onHoverColor);
 
+filter: drop-shadow(0px 4px 16px var( --onHoverColor));
+}
 .link_active {
   color: var(--text-primary-color);
 }
