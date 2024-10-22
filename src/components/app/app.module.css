@@ -27,3 +27,8 @@
 .detailHeader {
   text-align: center;
 }
+@media (max-width: 1219px) {
+  .app {
+    height: auto;
+  }
+}
