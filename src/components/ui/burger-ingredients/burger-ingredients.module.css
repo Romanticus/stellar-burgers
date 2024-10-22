@@ -3,6 +3,7 @@
   color: #f2f2f3;
   max-width: 600px;
 
+  max-height: 80svh;
   display: flex;
   flex-direction: column;
 }
@@ -32,4 +33,10 @@ p {
   font-weight: bold;
   font-size: 24px;
   line-height: 30px;
+}
+
+@media (max-width: 1219px) {
+  .burger_ingredients {
+    padding-left: 25px;
+  }
 }
