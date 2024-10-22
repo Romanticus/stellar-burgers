@@ -44,5 +44,6 @@ p {
 @media screen and (max-width: 1219px) and (max-height: calc(100vh)) and (orientation: portrait) {
   .burger_ingredients {
     max-height: none;
+    padding-bottom: 25px;
   }
 }
